@@ -35,3 +35,6 @@ __pycache__/
 # Secrets
 .env
 *.key
+
+# Marketplace package, built by node pack/pack.mjs
+wardrobe-scout.zip
