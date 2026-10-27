@@ -25,9 +25,9 @@ A Claude Code plugin that shows you what you would look like in new outfits, usi
 
 ### Why I made this
 
-I wanted to change the way I dressed without spending a fortune and without buying clothes that would bother me to wear. Looking at outfits on other people never told me how they would look on me. Seeing myself in them, round after round, did. Then the hard part was finding the actual pieces second-hand, in my size, in fabrics I can wear all day.
+I'm autistic, and I keep wearing the same fabrics and clothes, the ones that are comfortable for me. But I know that, in the social conversation around fashion, this counts against me, so I wanted to wear things that felt more like me and were comfortable at the same time. Then I realised it was a really complicated task, because buying clothes pushes me either towards the generic or towards ridiculously expensive, out-of-reach collector pieces.
 
-I did the whole thing in one long conversation with Claude, and it worked better than any shop. This plugin is that conversation, cleaned up and made free for anyone.
+But I thought it could work online: putting together shops, Vinted and the like, I could find mid-range brands, at a good price, in fabrics better than basic plastic. I decided Claude could help me. This is a digital experiment, but a practical one for my everyday life, so that my wife sees me in a better light.
 
 Borderless
 
@@ -119,9 +119,9 @@ Um plugin do Claude Code que mostra como você ficaria com roupas novas, usando 
 
 ### Por que eu fiz isso
 
-Eu queria mudar o jeito de me vestir sem gastar uma fortuna e sem comprar roupa que me incomodasse no corpo. Ver roupa em outras pessoas nunca me disse como ela ficaria em mim. Me ver nelas, rodada depois de rodada, disse. Depois, o difícil era achar as peças de verdade, usadas, no meu tamanho, em tecido que eu consigo usar o dia inteiro.
+Sou autista, e fico usando com frequência os mesmos tecidos e roupas que são confortáveis para mim. Porém sei que isso, em relação à conversa social de moda, é negativo, e assim queria vestir coisas que sentisse mais como eu e que ao mesmo tempo fossem confortáveis. Mas percebi que era uma tarefa muito complicada, porque comprar roupas me empurra para o genérico ou para coisas ridiculamente caras e inacessíveis, de colecionador.
 
-Fiz tudo isso numa conversa longa com o Claude, e funcionou melhor que qualquer loja. Este plugin é essa conversa, organizada e de graça pra quem quiser.
+Porém pensei que online seria possível: associando lojas, Vinted e coisas do tipo, poderia encontrar marcas medianas, a bom custo, e tecidos acima do plástico básico. Resolvi que o Claude podia me ajudar. Este é um experimento digital, mas prático para o meu dia a dia, a fim de deixar minha esposa olhando para mim com melhores olhos.
 
 Borderless
 
