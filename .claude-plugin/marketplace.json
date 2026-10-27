@@ -1,0 +1,23 @@
+{
+  "name": "wardrobe-scout",
+  "owner": {
+    "name": "Borderless",
+    "url": "https://github.com/inhabitants"
+  },
+  "metadata": {
+    "description": "See yourself in new outfits with your own photo, then find the pieces second-hand with Claude Code. You decide and you pay; it never buys.",
+    "version": "0.3.0"
+  },
+  "plugins": [
+    {
+      "name": "wardrobe-scout",
+      "source": "./",
+      "description": "Three skills: generate looks on your own photo, hunt real second-hand listings in your browser, and build a shopping list page for your phone.",
+      "version": "0.3.0",
+      "author": {
+        "name": "Borderless"
+      },
+      "keywords": ["fashion", "second-hand", "vinted", "style", "outfits"]
+    }
+  ]
+}

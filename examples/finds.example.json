@@ -1,0 +1,172 @@
+{
+  "lang": "en",
+  "title": "Autumn second-hand list",
+  "intro": "Fictional example. Lucas is a made-up person and every listing, price and link here is invented. Your own list comes from your photos, your looks and real listings checked while you are signed in.",
+  "checked": "2026-10-18",
+  "currency": "EUR",
+  "body": [
+    ["Body", "178 cm · 70 kg"],
+    ["Shirt", "M fits loose, L fits oversized"],
+    ["Trousers", "W31 to W32, or M with elastic"],
+    ["Shoes", "43, insole about 27.5 cm"]
+  ],
+  "looks": [
+    {
+      "id": "01",
+      "image": "../site/img/look-01.webp",
+      "alt": "Look 01 on Lucas: long white band-collar shirt worn untucked over wide black drawstring trousers"
+    },
+    {
+      "id": "02",
+      "image": "../site/img/look-02.webp",
+      "alt": "Look 02 on Lucas: black collarless chore jacket over a grey t-shirt, wide black trousers"
+    },
+    {
+      "id": "03",
+      "image": "../site/img/look-03.webp",
+      "alt": "Look 03 on Lucas: faded blue work jacket over a white band-collar shirt, wide black trousers"
+    }
+  ],
+  "owned": [
+    { "title": "black chore jacket", "looks": ["02"] },
+    { "title": "grey t-shirt", "looks": ["02"] },
+    { "title": "faded blue work jacket", "looks": ["03"] }
+  ],
+  "sections": [
+    {
+      "id": "wide-trousers",
+      "title": "Wide black trousers",
+      "short": "Trousers",
+      "text": "The base of three of Lucas's four favourite looks. One good pair covers all of them.",
+      "looks": ["01", "02", "03"],
+      "items": [
+        {
+          "id": "trousers-1",
+          "title": "Japanese-cut drawstring trousers",
+          "fit": "ok",
+          "fit_label": "Your size",
+          "first_choice": true,
+          "specs": [["Size", "M"], ["Fabric", "100% cotton"], ["Condition", "Very good"]],
+          "note": "The seller lists flat measurements in the photos: waist 40 cm, length 104 cm.",
+          "price": 22.40,
+          "shipping": 3.89,
+          "url": "https://example.com/listing/trousers-1",
+          "store": "Vinted"
+        },
+        {
+          "id": "trousers-2",
+          "title": "Pantalon large à pinces",
+          "fit": "warn",
+          "fit_label": "Check the waist",
+          "specs": [["Size", "L"], ["Fabric", "66% cotton"], ["Waist, flat", "42 cm (yours 40)"]],
+          "note": "2 cm wider at the waist than Lucas's reference pair. A French listing, so the question for the seller is in French.",
+          "ask": "Bonjour ! Pourriez-vous me donner la longueur de l'entrejambe et la largeur du bas de jambe, mesurées à plat ? Merci beaucoup !",
+          "price": 26.95,
+          "shipping": 4.30,
+          "url": "https://example.com/listing/trousers-2",
+          "store": "Vinted"
+        },
+        {
+          "id": "trousers-3",
+          "title": "Wool-blend wide trousers",
+          "fit": "bad",
+          "fit_label": "Not cotton",
+          "specs": [["Size", "M"], ["Fabric", "Wool and polyester"]],
+          "note": "The title says cotton, the listing details say wool. Kept here to show how a mismatch is flagged.",
+          "price": 18.00,
+          "shipping": 3.20,
+          "url": "https://example.com/listing/trousers-3",
+          "store": "Depop"
+        },
+        {
+          "id": "trousers-4",
+          "title": "Black drawstring trousers in M",
+          "sold": true,
+          "sold_on": "2026-10-20",
+          "price": 19.60,
+          "shipping": 3.89,
+          "url": "https://example.com/listing/trousers-4",
+          "store": "Vinted"
+        }
+      ]
+    },
+    {
+      "id": "band-collar-shirt",
+      "title": "White band-collar shirt",
+      "short": "Shirt",
+      "text": "Worn untucked over the wide trousers.",
+      "looks": ["01", "03"],
+      "items": [
+        {
+          "id": "shirt-1",
+          "title": "Band-collar shirt, long",
+          "fit": "ok",
+          "fit_label": "Loose, like the look",
+          "first_choice": true,
+          "specs": [["Size", "L"], ["Fabric", "100% cotton"], ["Condition", "New without tags"]],
+          "price": 9.10,
+          "shipping": 1.49,
+          "url": "https://example.com/listing/shirt-1",
+          "store": "Vinted"
+        },
+        {
+          "id": "shirt-2",
+          "title": "Heavy cotton band-collar shirt",
+          "fit": "ok",
+          "fit_label": "Your size",
+          "specs": [["Size", "M"], ["Fabric", "Thick cotton"]],
+          "note": "Warmer, good for winter.",
+          "price": 31.00,
+          "shipping": 4.99,
+          "url": "https://example.com/listing/shirt-2",
+          "store": "eBay"
+        }
+      ]
+    },
+    {
+      "id": "ring",
+      "title": "Steel signet ring",
+      "short": "Ring",
+      "text": "Stainless steel does not tarnish. Ring size is the inner diameter in millimetres.",
+      "steps": [
+        "Wrap a thread around the finger where the ring will sit.",
+        "Mark where it closes and measure the length in millimetres.",
+        "Divide by 3.14. That is the diameter the listings show."
+      ],
+      "items": [
+        {
+          "id": "ring-1",
+          "title": "Brand-name steel signet",
+          "fit": "info",
+          "fit_label": "20.2 mm",
+          "first_choice": true,
+          "specs": [["Retail", "about 60 new"], ["Metal", "Recycled stainless steel"], ["Condition", "Very good"]],
+          "note": "The best discount on this list, compared with the brand's own shop.",
+          "price": 16.45,
+          "shipping": 3.89,
+          "url": "https://example.com/listing/ring-1",
+          "store": "Vinted"
+        },
+        {
+          "id": "ring-2",
+          "title": "Silver signet with onyx",
+          "fit": "info",
+          "fit_label": "19 mm",
+          "specs": [["Retail", "from 179 new"], ["Metal", "925 silver, hallmarked"]],
+          "note": "Silver only when it is worth it: a branded piece at less than half its shop price.",
+          "price": 79.45,
+          "shipping": 4.30,
+          "url": "https://example.com/listing/ring-2",
+          "store": "Vestiaire Collective"
+        }
+      ]
+    }
+  ],
+  "closing": {
+    "title": "Before paying",
+    "paragraphs": [
+      "The shipping shown is the cheapest option of each listing. At checkout the total changes with the delivery you pick.",
+      "Ask the seller for flat measurements when you are not sure about the size."
+    ]
+  }
+}

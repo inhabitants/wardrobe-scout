@@ -1,0 +1,12 @@
+{
+  "name": "wardrobe-scout",
+  "version": "0.3.0",
+  "description": "See yourself in new outfits before you buy, then find the pieces second-hand. Generates looks with your own photo through the image API you already have (OpenAI, Gemini or fal), finds real listings on Vinted, Depop, Vestiaire Collective and eBay in your own browser, and builds a shopping list page for your phone. Never buys anything. Answers in your language.",
+  "author": {
+    "name": "Borderless",
+    "url": "https://github.com/inhabitants"
+  },
+  "repository": "https://github.com/inhabitants/wardrobe-scout",
+  "license": "MIT",
+  "keywords": ["fashion", "second-hand", "vinted", "depop", "vestiaire", "ebay", "style", "outfits", "thrift", "brecho"]
+}

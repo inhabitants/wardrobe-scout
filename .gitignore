@@ -1,0 +1,37 @@
+# Wardrobe Scout: this repository holds the METHOD, never anyone's photos.
+# The main protection is keeping your wardrobe/ folder OUTSIDE any git repository.
+# The rules below are the second layer, so nobody pushes their face to a fork by accident.
+
+# Personal working folders
+wardrobe/
+photos/
+looks/
+
+# Photos and generated images
+*.jpg
+*.jpeg
+*.png
+*.heic
+*.heif
+*.webp
+*.avif
+
+# The project page's own images stay tracked: Lucas, a synthetic person who does not exist,
+# and screenshots of the fictional example. Only .webp and the social card, so a real photo
+# dropped in site/ by mistake (.jpg, .png, .heic) is still ignored.
+!site/img/*.webp
+!site/img/og.jpg
+
+# Personal lists (the fictional example in examples/ stays tracked)
+finds.json
+profile.md
+!templates/profile.md
+shopping-list.html
+
+# Python
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+*.key

@@ -1,0 +1,18 @@
+# Wardrobe Scout
+
+> Claude Code plugin: see yourself in new outfits generated from your own photo, then find the pieces second-hand on Vinted, Depop, Vestiaire Collective and eBay, and get a shopping list page for your phone. It never buys anything. MIT. Answers in the user's language.
+
+## Skills
+
+- [wardrobe-looks](skills/wardrobe-looks/SKILL.md): intake (photos, sizes, comfort, taste), optional start from pins (keep the cut, swap the fabric), rounds of four looks on the person's photo through their own OpenAI, Gemini or fal key, feedback turned into rules, changing one piece of a liked look, base pieces ranked by how many favourite looks they unlock.
+- [wardrobe-hunt](skills/wardrobe-hunt/SKILL.md): searches shops in the person's signed-in browser, in several languages, by garment, brand or fabric rather than trend words, checks each listing (availability, fabric, size, condition, shipping, signs of a fast-fashion copy), ranks three per piece, optional deal hunting against shop prices. Never buys, never messages sellers.
+- [wardrobe-list](skills/wardrobe-list/SKILL.md): builds the shopping list page from finds.json, with an optional look picker (tap a look, see what is left to buy, owned and bought pieces excluded; #look-<id> links), a copy button with a message for the seller in the listing's language, and sold listings moved out on rebuild.
+
+## Files
+
+- [Shop guide](skills/wardrobe-hunt/stores.md): search addresses, fees and quirks per shop, search words in several languages.
+- [generate_look.py](scripts/generate_look.py): one look from 1 to 4 reference photos, or an edit of an existing look with --edit; providers openai, gemini, fal (fal defaults to GPT Image 2.5 Sunburst); standard library only.
+- [build_list.py](scripts/build_list.py): finds.json to a single HTML page; English and Portuguese labels built in.
+- [Profile template](templates/profile.md)
+- [Fictional example](examples/finds.example.json)
+- [Disclaimer](DISCLAIMER.md)

@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Autumn second-hand list</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+body { margin: 0; }
+img { max-width: 100%; }
+/* Layout: second-hand price tags hung in rows, one row per piece, the person's measurements on top */
+:root {
+  --paper: #F1F2F0;
+  --card: #FBFBFA;
+  --ink: #1B1C1F;
+  --muted: #5F646B;
+  --rule: #D6D9DC;
+  --indigo: #2E4170;
+  --indigo-soft: #E2E7F1;
+  --ok: #2C6643;
+  --ok-bg: #E0EEE5;
+  --warn: #85560F;
+  --warn-bg: #F5EAD4;
+  --bad: #962D2D;
+  --bad-bg: #F4E0DF;
+  --display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --body: "Zen Kaku Gothic New", "Hiragino Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121317; --card: #1B1D22; --ink: #E6E6E3; --muted: #9DA1A8; --rule: #2F3238;
+    --indigo: #A3B5E3; --indigo-soft: #232A3E;
+    --ok: #8FCBA0; --ok-bg: #1D3326; --warn: #E2B566; --warn-bg: #392D17; --bad: #EE9C97; --bad-bg: #3C2321;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121317; --card: #1B1D22; --ink: #E6E6E3; --muted: #9DA1A8; --rule: #2F3238;
+  --indigo: #A3B5E3; --indigo-soft: #232A3E;
+  --ok: #8FCBA0; --ok-bg: #1D3326; --warn: #E2B566; --warn-bg: #392D17; --bad: #EE9C97; --bad-bg: #3C2321;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 64px;
+  display: grid;
+  gap: 56px;
+}
+
+/* topo */
+.top { display: grid; gap: 20px; }
+.eyebrow {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.lede { margin: 0; max-width: 60ch; font-size: 1.05rem; color: var(--ink); }
+
+.medidas {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.medidas > div { background: var(--card); padding: 14px 16px; display: grid; gap: 2px; min-width: 0; }
+.medidas dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.medidas dd { margin: 0; font-weight: 500; }
+.medidas .corpo { background: var(--indigo); }
+.medidas .corpo dt { color: var(--indigo-soft); }
+.medidas .corpo dd { color: var(--paper); font-family: var(--mono); font-size: 1.15rem; }
+
+.resumo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  margin: 0;
+  color: var(--muted);
+}
+.resumo strong {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 1.35rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.indice { display: flex; flex-wrap: wrap; gap: 8px; }
+.indice a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--indigo);
+  text-decoration: none;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  padding: 5px 10px;
+  border-radius: 99px;
+}
+.indice a:hover { border-color: var(--indigo); }
+.indice a:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+html { scroll-behavior: smooth; }
+.cat { scroll-margin-top: 16px; }
+
+/* categorias */
+.cat { display: grid; gap: 20px; }
+.cat-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 24px;
+  align-items: end;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.cat-head.sem-foto { grid-template-columns: minmax(0, 1fr); }
+.cat-head figure { margin: 0; display: grid; gap: 4px; }
+.cat-head img {
+  display: block;
+  width: clamp(130px, 24vw, 230px);
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  background: var(--card);
+}
+.cat-head figcaption { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.cat-head h2 {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3.6vw, 2rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.cat-head p { margin: 0; max-width: 58ch; color: var(--muted); }
+
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+}
+
+/* a etiqueta */
+.tag {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 3px 3px 3px 3px;
+  padding: 16px 16px 14px;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  min-width: 0;
+}
+.tag::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.tag-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-right: 22px; }
+.fit {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.fit.ok { color: var(--ok); background: var(--ok-bg); }
+.fit.warn { color: var(--warn); background: var(--warn-bg); }
+.fit.bad { color: var(--bad); background: var(--bad-bg); }
+.fit.info { color: var(--indigo); background: var(--indigo-soft); }
+.pick {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--indigo);
+}
+.tag h3 { margin: 0; font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+.specs {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2px 12px;
+  font-size: 13px;
+}
+.specs dt { color: var(--muted); font-family: var(--mono); font-size: 12px; }
+.specs dd { margin: 0; }
+.nota { margin: 0; font-size: 13px; color: var(--muted); }
+.tag-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--rule);
+}
+.price {
+  margin: 0;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.price small { display: block; font-size: 10px; color: var(--muted); letter-spacing: 0.04em; margin-top: 4px; }
+.open {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--paper);
+  background: var(--indigo);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 3px;
+}
+.open:hover { filter: brightness(1.12); }
+.open:focus-visible, .got input:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+.got {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+.got input { width: 16px; height: 16px; accent-color: var(--indigo); margin: 0; }
+.tag.is-got { opacity: 0.55; }
+.tag.is-got .price { text-decoration: line-through; }
+
+/* anel: como medir */
+.medir {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  counter-reset: passo;
+}
+.medir li {
+  counter-increment: passo;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  font-size: 14px;
+}
+.medir li::before {
+  content: counter(passo);
+  font-family: var(--mono);
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--indigo);
+  color: var(--indigo);
+  display: grid;
+  place-items: center;
+}
+
+/* mensagem pro vendedor: copia e mostra o texto que vai ser mandado */
+.ask { display: grid; gap: 6px; }
+.ask-copy {
+  justify-self: start;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--indigo);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 99px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.ask-copy:hover { border-color: var(--indigo); }
+.ask-copy:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+.ask-text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+  background: var(--paper);
+  border: 1px dashed var(--rule);
+  padding: 8px 10px;
+  user-select: all;
+  overflow-wrap: anywhere;
+}
+
+/* escolher por look: tocar num look acende só as peças dele */
+.looks-pick { display: grid; gap: 12px; scroll-margin-top: 16px; }
+.looks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.look-pick {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  gap: 4px;
+  width: 100%;
+}
+.look-pick img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+.look-pick span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.look-pick:hover img { border-color: var(--indigo); }
+.look-pick:focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; }
+.look-pick[aria-pressed="true"] img { border-color: var(--indigo); box-shadow: 0 0 0 2px var(--indigo); }
+.look-pick[aria-pressed="true"] span { color: var(--indigo); font-weight: 500; }
+main[data-sel] .look-pick[aria-pressed="false"] img { opacity: 0.45; }
+.cat { transition: opacity 0.15s ease; }
+main[data-sel] .cat:not(.on) { opacity: 0.38; }
+.escolha {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+.escolha strong { font-weight: 700; }
+.escolha a { color: var(--indigo); }
+.escolha button {
+  margin-left: auto;
+  font: inherit;
+  font-size: 13px;
+  color: var(--indigo);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 99px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+.escolha button:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
+@media (max-width: 480px) { .looks { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } }
+
+/* próximo passo */
+.proximo {
+  border: 1px solid var(--indigo);
+  background: var(--indigo-soft);
+  padding: 20px;
+  display: grid;
+  gap: 8px;
+}
+.proximo h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 1.35rem; }
+.proximo p { margin: 0; max-width: 62ch; }
+.saiu { margin: 0; font-size: 13px; color: var(--muted); }
+.rodape { margin: 0; font-size: 12px; color: var(--muted); font-family: var(--mono); }
+
+@media (max-width: 480px) {
+  .wrap { padding-block: 28px 48px; gap: 44px; }
+  .cat-head { gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <p class="eyebrow">Depop · Vestiaire Collective · Vinted · eBay · checked while signed in on 2026-10-18</p>
+    <h1>Autumn second-hand list</h1>
+    <p class="lede">Fictional example. Lucas is a made-up person and every listing, price and link here is invented. Your own list comes from your photos, your looks and real listings checked while you are signed in.</p>
+    <dl class="medidas"><div class="corpo"><dt>Body</dt><dd>178 cm · 70 kg</dd></div><div><dt>Shirt</dt><dd>M fits loose, L fits oversized</dd></div><div><dt>Trousers</dt><dd>W31 to W32, or M with elastic</dd></div><div><dt>Shoes</dt><dd>43, insole about 27.5 cm</dd></div></dl>
+    <p class="resumo"><span>First choice of each of the 3 pieces, with shipping</span><strong>€57.22</strong><span>Each seller charges their own shipping. Prices use the cheapest shipping each listing shows.</span></p>
+    <nav class="indice" aria-label="Pieces"><a href="#looks">Looks</a><a href="#wide-trousers">Trousers</a><a href="#band-collar-shirt">Shirt</a><a href="#ring">Ring</a></nav>
+  </header>
+
+  <section class="looks-pick" id="looks" aria-label="Looks">
+    <ul class="looks">
+      <li><button type="button" class="look-pick" id="look-01" data-look="01" aria-pressed="false"><img src="../site/img/look-01.webp" alt="Look 01 on Lucas: long white band-collar shirt worn untucked over wide black drawstring trousers" width="420" height="630"><span>Look 01</span></button></li>
+      <li><button type="button" class="look-pick" id="look-02" data-look="02" aria-pressed="false"><img src="../site/img/look-02.webp" alt="Look 02 on Lucas: black collarless chore jacket over a grey t-shirt, wide black trousers" width="420" height="630"><span>Look 02</span></button></li>
+      <li><button type="button" class="look-pick" id="look-03" data-look="03" aria-pressed="false"><img src="../site/img/look-03.webp" alt="Look 03 on Lucas: faded blue work jacket over a white band-collar shirt, wide black trousers" width="420" height="630"><span>Look 03</span></button></li>
+    </ul>
+    <p class="escolha" id="escolha" aria-live="polite">Tap a look to light up only its pieces.</p>
+  </section>
+
+  <section class="cat" id="wide-trousers" data-looks="01 02 03">
+    <div class="cat-head sem-foto">
+      <div><h2>Wide black trousers</h2><p>The base of three of Lucas&#x27;s four favourite looks. One good pair covers all of them.</p></div>
+    </div>
+    <ul class="tags">
+      <li class="tag" data-id="trousers-1">
+        <div class="tag-top"><span class="fit ok">Your size</span><span class="pick">1st choice</span></div>
+        <h3>Japanese-cut drawstring trousers</h3>
+        <dl class="specs"><dt>Size</dt><dd>M</dd><dt>Fabric</dt><dd>100% cotton</dd><dt>Condition</dt><dd>Very good</dd></dl>
+        <p class="nota">The seller lists flat measurements in the photos: waist 40 cm, length 104 cm.</p>
+        <div class="tag-foot">
+          <p class="price">€26.29<small>22.40 + shipping 3.89</small></p>
+          <a class="open" href="https://example.com/listing/trousers-1" target="_blank" rel="noopener">Open on Vinted</a>
+        </div>
+        <label class="got" for="got-trousers-1"><input type="checkbox" id="got-trousers-1"> Bought</label>
+      </li>
+      <li class="tag" data-id="trousers-2">
+        <div class="tag-top"><span class="fit warn">Check the waist</span></div>
+        <h3>Pantalon large à pinces</h3>
+        <dl class="specs"><dt>Size</dt><dd>L</dd><dt>Fabric</dt><dd>66% cotton</dd><dt>Waist, flat</dt><dd>42 cm (yours 40)</dd></dl>
+        <p class="nota">2 cm wider at the waist than Lucas&#x27;s reference pair. A French listing, so the question for the seller is in French.</p>
+        <div class="tag-foot">
+          <p class="price">€31.25<small>26.95 + shipping 4.30</small></p>
+          <a class="open" href="https://example.com/listing/trousers-2" target="_blank" rel="noopener">Open on Vinted</a>
+        </div>
+        <div class="ask"><button type="button" class="ask-copy" aria-controls="ask-trousers-2" aria-expanded="false">Message for the seller</button><p class="ask-text" id="ask-trousers-2" hidden>Bonjour ! Pourriez-vous me donner la longueur de l&#x27;entrejambe et la largeur du bas de jambe, mesurées à plat ? Merci beaucoup !</p></div>
+        <label class="got" for="got-trousers-2"><input type="checkbox" id="got-trousers-2"> Bought</label>
+      </li>
+      <li class="tag" data-id="trousers-3">
+        <div class="tag-top"><span class="fit bad">Not cotton</span></div>
+        <h3>Wool-blend wide trousers</h3>
+        <dl class="specs"><dt>Size</dt><dd>M</dd><dt>Fabric</dt><dd>Wool and polyester</dd></dl>
+        <p class="nota">The title says cotton, the listing details say wool. Kept here to show how a mismatch is flagged.</p>
+        <div class="tag-foot">
+          <p class="price">€21.20<small>18.00 + shipping 3.20</small></p>
+          <a class="open" href="https://example.com/listing/trousers-3" target="_blank" rel="noopener">Open on Depop</a>
+        </div>
+        <label class="got" for="got-trousers-3"><input type="checkbox" id="got-trousers-3"> Bought</label>
+      </li>
+    </ul>
+    <p class="saiu">Removed from the list: Black drawstring trousers in M, sold on 2026-10-20.</p>
+  </section>
+
+  <section class="cat" id="band-collar-shirt" data-looks="01 03">
+    <div class="cat-head sem-foto">
+      <div><h2>White band-collar shirt</h2><p>Worn untucked over the wide trousers.</p></div>
+    </div>
+    <ul class="tags">
+      <li class="tag" data-id="shirt-1">
+        <div class="tag-top"><span class="fit ok">Loose, like the look</span><span class="pick">1st choice</span></div>
+        <h3>Band-collar shirt, long</h3>
+        <dl class="specs"><dt>Size</dt><dd>L</dd><dt>Fabric</dt><dd>100% cotton</dd><dt>Condition</dt><dd>New without tags</dd></dl>
+        
+        <div class="tag-foot">
+          <p class="price">€10.59<small>9.10 + shipping 1.49</small></p>
+          <a class="open" href="https://example.com/listing/shirt-1" target="_blank" rel="noopener">Open on Vinted</a>
+        </div>
+        <label class="got" for="got-shirt-1"><input type="checkbox" id="got-shirt-1"> Bought</label>
+      </li>
+      <li class="tag" data-id="shirt-2">
+        <div class="tag-top"><span class="fit ok">Your size</span></div>
+        <h3>Heavy cotton band-collar shirt</h3>
+        <dl class="specs"><dt>Size</dt><dd>M</dd><dt>Fabric</dt><dd>Thick cotton</dd></dl>
+        <p class="nota">Warmer, good for winter.</p>
+        <div class="tag-foot">
+          <p class="price">€35.99<small>31.00 + shipping 4.99</small></p>
+          <a class="open" href="https://example.com/listing/shirt-2" target="_blank" rel="noopener">Open on eBay</a>
+        </div>
+        <label class="got" for="got-shirt-2"><input type="checkbox" id="got-shirt-2"> Bought</label>
+      </li>
+    </ul>
+  </section>
+
+  <section class="cat" id="ring">
+    <div class="cat-head sem-foto">
+      <div><h2>Steel signet ring</h2><p>Stainless steel does not tarnish. Ring size is the inner diameter in millimetres.</p></div>
+    </div>
+    <ol class="medir"><li>Wrap a thread around the finger where the ring will sit.</li><li>Mark where it closes and measure the length in millimetres.</li><li>Divide by 3.14. That is the diameter the listings show.</li></ol>
+    <ul class="tags">
+      <li class="tag" data-id="ring-1">
+        <div class="tag-top"><span class="fit info">20.2 mm</span><span class="pick">1st choice</span></div>
+        <h3>Brand-name steel signet</h3>
+        <dl class="specs"><dt>Retail</dt><dd>about 60 new</dd><dt>Metal</dt><dd>Recycled stainless steel</dd><dt>Condition</dt><dd>Very good</dd></dl>
+        <p class="nota">The best discount on this list, compared with the brand&#x27;s own shop.</p>
+        <div class="tag-foot">
+          <p class="price">€20.34<small>16.45 + shipping 3.89</small></p>
+          <a class="open" href="https://example.com/listing/ring-1" target="_blank" rel="noopener">Open on Vinted</a>
+        </div>
+        <label class="got" for="got-ring-1"><input type="checkbox" id="got-ring-1"> Bought</label>
+      </li>
+      <li class="tag" data-id="ring-2">
+        <div class="tag-top"><span class="fit info">19 mm</span></div>
+        <h3>Silver signet with onyx</h3>
+        <dl class="specs"><dt>Retail</dt><dd>from 179 new</dd><dt>Metal</dt><dd>925 silver, hallmarked</dd></dl>
+        <p class="nota">Silver only when it is worth it: a branded piece at less than half its shop price.</p>
+        <div class="tag-foot">
+          <p class="price">€83.75<small>79.45 + shipping 4.30</small></p>
+          <a class="open" href="https://example.com/listing/ring-2" target="_blank" rel="noopener">Open on Vestiaire Collective</a>
+        </div>
+        <label class="got" for="got-ring-2"><input type="checkbox" id="got-ring-2"> Bought</label>
+      </li>
+    </ul>
+  </section>
+
+  <section class="proximo"><h2>Before paying</h2><p>The shipping shown is the cheapest option of each listing. At checkout the total changes with the delivery you pick.</p><p>Ask the seller for flat measurements when you are not sure about the size.</p></section>
+
+  <p class="rodape">Listings sell fast. The &quot;Bought&quot; boxes are saved only on this device.</p>
+</main>
+<script>
+(function () {
+  var KEY = "wardrobe-scout-autumn-second-hand-list";
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { state = {}; }
+  document.querySelectorAll(".tag").forEach(function (tag) {
+    var id = tag.getAttribute("data-id");
+    var box = tag.querySelector(".got input");
+    if (!box) return;
+    box.checked = !!state[id];
+    tag.classList.toggle("is-got", box.checked);
+    box.addEventListener("change", function () {
+      state[id] = box.checked;
+      tag.classList.toggle("is-got", box.checked);
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    });
+  });
+})();
+
+(function () {
+  var L = {"look_summary": "{n} pieces to buy, first choices {total} with shipping:", "look_summary_one": "1 piece to buy, first choice {total} with shipping:", "look_none": "No piece of this look is on the list yet.", "look_done": "Everything this look needs is bought.", "look_owned": "Already yours: {list}.", "look_bought": "Bought: {list}.", "show_all": "Show all", "ask": "Message for the seller", "copied": "Copied. Paste it in the chat with the seller.", "copy_failed": "Select the text and copy it."};
+  var M = {"english": true, "symbol": "€"};
+  var LOOKS = {"01": {"caption": "Look 01", "note": "", "pieces": [{"sec": "wide-trousers", "name": "Trousers", "price": 26.29}, {"sec": "band-collar-shirt", "name": "Shirt", "price": 10.59}], "owned": []}, "02": {"caption": "Look 02", "note": "", "pieces": [{"sec": "wide-trousers", "name": "Trousers", "price": 26.29}], "owned": ["black chore jacket", "grey t-shirt"]}, "03": {"caption": "Look 03", "note": "", "pieces": [{"sec": "wide-trousers", "name": "Trousers", "price": 26.29}, {"sec": "band-collar-shirt", "name": "Shirt", "price": 10.59}], "owned": ["faded blue work jacket"]}};
+
+  // Seller message: copy it, and show it so the person sees what they will send.
+  document.querySelectorAll(".ask-copy").forEach(function (btn) {
+    var text = document.getElementById(btn.getAttribute("aria-controls"));
+    btn.addEventListener("click", function () {
+      text.hidden = false;
+      btn.setAttribute("aria-expanded", "true");
+      function done(msg) {
+        btn.textContent = msg;
+        setTimeout(function () { btn.textContent = L.ask; }, 2500);
+      }
+      function fallback() {
+        var range = document.createRange();
+        range.selectNodeContents(text);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        done(L.copy_failed);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text.textContent).then(function () { done(L.copied); }, fallback);
+      } else {
+        fallback();
+      }
+    });
+  });
+
+  var main = document.querySelector("main");
+  var out = document.getElementById("escolha");
+  if (!out) return;
+  var HINT = out.innerHTML;
+  var picks = document.querySelectorAll(".look-pick");
+  var cats = document.querySelectorAll(".cat");
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function money(v) {
+    var parts = v.toFixed(2).split(".");
+    var whole = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, M.english ? "," : ".");
+    var num = whole + (M.english ? "." : ",") + parts[1];
+    return M.english && M.symbol.length === 1 ? M.symbol + num : num + " " + M.symbol;
+  }
+  function bought(secId) {
+    var sec = document.getElementById(secId);
+    return !!(sec && sec.querySelector(".tag.is-got"));
+  }
+  function summary(look) {
+    var d = LOOKS[look];
+    var left = d.pieces.filter(function (p) { return !bought(p.sec); });
+    var got = d.pieces.filter(function (p) { return bought(p.sec); });
+    var link = function (p) { return '<a href="#' + esc(p.sec) + '">' + esc(p.name) + "</a>"; };
+    var parts = ["<strong>" + esc(d.caption) + "</strong>"];
+    if (left.length) {
+      var total = left.reduce(function (s, p) { return s + p.price; }, 0);
+      var head = (left.length === 1 ? L.look_summary_one : L.look_summary)
+        .replace("{n}", left.length).replace("{total}", money(total));
+      parts.push("<span>" + esc(head) + " " + left.map(link).join(", ") + ".</span>");
+    } else {
+      parts.push("<span>" + esc(d.pieces.length ? L.look_done : L.look_none) + "</span>");
+    }
+    if (got.length) parts.push("<span>" + esc(L.look_bought).replace("{list}", got.map(link).join(", ")) + "</span>");
+    if (d.owned.length) parts.push("<span>" + esc(L.look_owned.replace("{list}", d.owned.join(", "))) + "</span>");
+    if (d.note) parts.push("<span>" + esc(d.note) + "</span>");
+    return parts.join(" ");
+  }
+  function pick(look) {
+    if (look) main.setAttribute("data-sel", look); else main.removeAttribute("data-sel");
+    picks.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-look") === look)); });
+    cats.forEach(function (c) {
+      var uses = (" " + (c.getAttribute("data-looks") || "") + " ").indexOf(" " + look + " ") !== -1;
+      c.classList.toggle("on", !!look && uses);
+    });
+    if (!look) { out.innerHTML = HINT; return; }
+    out.innerHTML = summary(look) + ' <button type="button" id="ver-todos"></button>';
+    var all = document.getElementById("ver-todos");
+    all.textContent = L.show_all;
+    all.addEventListener("click", function () { pick(null); });
+  }
+  picks.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var look = b.getAttribute("data-look");
+      pick(main.getAttribute("data-sel") === look ? null : look);
+    });
+  });
+  document.querySelectorAll(".got input").forEach(function (box) {
+    box.addEventListener("change", function () {
+      var look = main.getAttribute("data-sel");
+      if (look) pick(look);
+    });
+  });
+  var start = (location.hash || "").replace(/^#look-/, "");
+  if (start && LOOKS[start]) pick(start);
+})();
+</script>
+</body>
+</html>
